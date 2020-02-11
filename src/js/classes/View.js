@@ -32,7 +32,7 @@ export default class View {
         if (state === 0) {
             state = 1;
         }
-
+        
         this.canvas.ctx.drawImage(bird.images[state - 1], bird.x, bird.y);
     }
 

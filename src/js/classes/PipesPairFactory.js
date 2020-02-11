@@ -1,6 +1,6 @@
-import Pipe from './pipe.js';
-import PipesPair from './pipesPair.js';
-import {random} from './functions.js';
+import Pipe from './Pipe';
+import PipesPair from './PipesPair';
+import { random } from '../functions.js';
 
 export default class PipesPairFactory {
     constructor(extraHeight, spaceBetween, offset, speed, image, canvasHeight) {

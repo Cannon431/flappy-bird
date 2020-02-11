@@ -1,30 +1,30 @@
-import GameImage from './src/gameImage.js';
-import Canvas from './src/canvas.js';
-import Game from './src/game.js';
-import View from './src/view.js';
-import Bird from './src/bird.js';
-import PipesPairFactory from './src/pipesPairFactory.js';
-import Ground from './src/ground.js';
-import {randomElement} from './src/functions.js';
+import GameImage from './classes/GameImage';
+import Canvas from './classes/Canvas';
+import Game from './classes/Game';
+import View from './classes/View';
+import Bird from './classes/Bird';
+import PipesPairFactory from './classes/PipesPairFactory';
+import Ground from './classes/Ground';
+import { randomElement } from './functions';
 
 const birdColors = ['blue', 'red', 'yellow'],
-    backgrounds = ['./img/background-day.png', './img/background-night.png'];
+    backgrounds = ['src/img/background-day.png', 'src/img/background-night.png'];
 
 let backgroundImg = new GameImage(randomElement(backgrounds)),
-    tapImg = new GameImage('./img/tap.png'),
-    pipeImg = new GameImage('./img/pipe-green.png'),
-    groundImg = new GameImage('./img/ground.png'),
-    gameOverImg = new GameImage('./img/gameover.png');
+    tapImg = new GameImage('src/img/tap.png'),
+    pipeImg = new GameImage('src/img/pipe-green.png'),
+    groundImg = new GameImage('src/img/ground.png'),
+    gameOverImg = new GameImage('src/img/gameover.png');
 
 let birdStates = [], birdColor = randomElement(birdColors);
 for (let i = 0; i < 3; i++) {
     birdStates[i] = new Image();
-    birdStates[i].src = `./img/${birdColor}bird-${i + 1}.png`;
+    birdStates[i].src = `src/img/${birdColor}bird-${i + 1}.png`;
 }
 
-let newScoreSound = new Audio('./sounds/score.mp3'),
-    hitSound = new Audio('./sounds/hit.mp3'),
-    dieSound = new Audio('./sounds/die.mp3');
+let newScoreSound = new Audio('src/sounds/score.mp3'),
+    hitSound = new Audio('src/sounds/hit.mp3'),
+    dieSound = new Audio('src/sounds/die.mp3');
 
 let canvas = new Canvas('canvas', 288, 450),
     game = new Game(),
@@ -164,7 +164,7 @@ function jump() {
 
     bird.jump();
 
-    let flySound = new Audio('./sounds/fly.mp3');
+    let flySound = new Audio('src/sounds/fly.mp3');
     flySound.play();
 }
 

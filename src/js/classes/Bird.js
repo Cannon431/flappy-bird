@@ -1,4 +1,4 @@
-import GameObject from './gameObject.js';
+import GameObject from './GameObject';
 
 export default class Bird extends GameObject {
     constructor(x, y, images, riseCoefficient, fallCoefficient, fallLimit) {

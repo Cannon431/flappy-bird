@@ -1,3 +1,3 @@
-import GameObject from './gameObject.js';
+import GameObject from './GameObject';
 
 export default class Pipe extends GameObject {}
