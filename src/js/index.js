@@ -30,7 +30,7 @@ let canvas = new Canvas('canvas', 288, 450),
     game = new Game(),
     view = new View(canvas),
     bird = new Bird(60, 200, birdStates, .9, .1, 10),
-    ground = new Ground(0, 375, groundImg),
+    grounds = [new Ground(0, 375, groundImg)],
     pipesFactory = new PipesPairFactory(200, 100, [-100, 60], 1.8, pipeImg, canvas.height),
     pipes = [];
 
@@ -53,6 +53,11 @@ function frame() {
 
         if (bird.animationCount > 15) {
             bird.animationCount = 0;
+        }
+
+        grounds.forEach(ground => ground.move());
+        if (grounds[grounds.length - 1].x2 <= canvas.width) {
+            grounds.push(new Ground(grounds[grounds.length - 1].x2, 375, groundImg))
         }
 
         // Manipulation with pipes
@@ -87,7 +92,7 @@ function frame() {
         }
 
         // Checking for has collision with ground
-        if (bird.intersectsWith(ground)) {
+        if (grounds.some(ground => bird.intersectsWith(ground))) {
             end();
         }
     } else {
@@ -96,9 +101,11 @@ function frame() {
         bird.y += bird.fallLimit;
 
         // Checking for ground collision
-        if (bird.y + bird.height >= ground.y) {
-            bird.y = ground.y - bird.height;
-        }
+        grounds.forEach(ground => {
+            if (bird.y + bird.height >= ground.y) {
+                bird.y = ground.y - bird.height;
+            }
+        })
     }
 
     render();
@@ -109,7 +116,7 @@ function render() {
     view.renderImage(backgroundImg, 0, -25);
     pipes.forEach(pipesPair => view.renderPipes(pipesPair));
 
-    view.renderObject(ground);
+    grounds.forEach(ground => view.renderObject(ground));
 
     view.renderBird(bird, Math.ceil(bird.animationCount / 5));
 
